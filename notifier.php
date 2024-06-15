@@ -67,7 +67,7 @@ while (time() < NOTIFY_UNTILL) {
     
     }
 
-    echo $cli_default . "\n\n" . '-- Inerval (' . NOTIFY_INTERVAL . 's) --' . "\n\n"; 
+    echo $cli_default . "\n\n" . '-- Interval (' . NOTIFY_INTERVAL . 's) --' . "\n\n"; 
     sleep(NOTIFY_INTERVAL);
 }
 
