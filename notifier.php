@@ -24,7 +24,7 @@ while (time() < NOTIFY_UNTILL) {
         $name = $recipient['name'];
         $email = $recipient['email'];
 
-        $subject = "পড় ভাই পড় 💥!!! আর মাত্র " . en2bn(round($time_left_in_hours)) . ' ঘণ্টা বাকি!!!';
+        $subject = "পড় ভাই পড় 💥!!! আর মাত্র " . en2bn(round($time_left_in_hours, 2)) . ' ঘণ্টা বাকি!!!';
 
         $body = <<<MSGBODY
     
@@ -59,7 +59,7 @@ while (time() < NOTIFY_UNTILL) {
     
         MSGBODY;
 
-        $from = 'Time_Left_' . round($time_left_in_hours, 2) . '_Hours';
+        $from = 'Time_Left_' . round($time_left_in_hours) . '_Hours';
 
         if (sendMail($email, $subject, $body, $from)) {
             $sentMail = is_array($email) ? implode(',', $email) : $email; 
