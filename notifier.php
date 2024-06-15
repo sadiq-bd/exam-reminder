@@ -24,7 +24,11 @@ while (time() < NOTIFY_UNTILL) {
         $name = $recipient['name'];
         $email = $recipient['email'];
 
-        $subject = "পড় ভাই পড় 💥!!! আর মাত্র " . en2bn(round($time_left_in_hours, 2)) . ' ঘণ্টা বাকি!!!';
+        $hours = round($time_left_in_hours, 2) . ' ঘণ্টা ';
+        $mins = round($time_left_in_mins - (intval($time_left_in_hours) / 60)) . ' মিনিট ';
+        if ($mins <= 0) $mins = '';
+
+        $subject = en2bn('পড় ভাই পড় 💥!!! আর মাত্র ' . $hours . $mins . 'বাকি!!!');
 
         $body = <<<MSGBODY
     
