@@ -34,8 +34,11 @@ while (time() < NOTIFY_UNTILL) {
                 <title>{$subject}</title>
             </head>
             <body>
-                প্রিয় {$name}, <br>
+                <h5>প্রিয় {$name}, </h5><br>
 
+                <p>
+                    {$subject}
+                </p>
                 <h2 style="color:red;">অনুগ্রহ করে পড়তে বসুন</h2>
 
                 <br>
@@ -43,6 +46,11 @@ while (time() < NOTIFY_UNTILL) {
                 <br>
 
                 <center>আপনার শুভাকাঙ্ক্ষী - <a href="https://sadiq.us.to">সাদিক</a></center>
+
+                <br>
+                <br>
+                <br>
+                <small>Next Remind after 1 hour</small>
 
             </body>
             </html>
@@ -57,6 +65,7 @@ while (time() < NOTIFY_UNTILL) {
     
     }
 
+    echo $cli_default . "\n\n" . '-- Inerval (' . NOTIFY_INTERVAL . 's) --' . "\n\n"; 
     sleep(NOTIFY_INTERVAL);
 }
 
