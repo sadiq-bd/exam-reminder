@@ -59,7 +59,7 @@ while (time() < NOTIFY_UNTILL) {
     
         MSGBODY;
 
-        $from = 'Time Left ' . en2bn(round($time_left_in_hours, 2)) . ' Hours';
+        $from = 'Time_Left_' . round($time_left_in_hours, 2) . '_Hours';
 
         if (sendMail($email, $subject, $body, $from)) {
             $sentMail = is_array($email) ? implode(',', $email) : $email; 
