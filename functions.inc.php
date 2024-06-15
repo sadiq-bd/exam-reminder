@@ -17,7 +17,7 @@ function en2bn($str) {
     ], $str);
 }
 
-function sendMail(string|array $to, string $subject, string $body) {
+function sendMail(string|array $to, string $subject, string $body, string $fromName) {
 
     $mail = new PHPMailer(true);
 
@@ -41,7 +41,7 @@ function sendMail(string|array $to, string $subject, string $body) {
         $mail->Encoding = 'base64';
 
         //Recipients
-        $mail->setFrom(MAIL_FROM, MAIL_FROM_NAME);
+        $mail->setFrom(MAIL_FROM, $fromName);
 
         if (is_array($to)) {
             foreach($to as $address) {

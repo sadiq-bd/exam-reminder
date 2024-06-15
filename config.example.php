@@ -15,6 +15,3 @@ define('MAIL_USERNAME', 'username@gmail.com');
 define('MAIL_PASSWORD', 'password_here');
 
 define('MAIL_FROM', MAIL_USERNAME);
-
-define('MAIL_FROM_NAME', 'Study Reminder');
-

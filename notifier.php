@@ -17,7 +17,7 @@ while (time() < NOTIFY_UNTILL) {
     $time_left_in_hours = $time_left_in_mins / 60;   
     $time_left_in_days = $time_left_in_hours / 24;   
 
-    $interval = NOTIFY_INTERVAL;
+    $interval = NOTIFY_INTERVAL / 60;   // in minutes
 
     foreach (getRecipients(RECIPIENTS_FILE) as $j => $recipient) {
         $i++;
@@ -52,15 +52,18 @@ while (time() < NOTIFY_UNTILL) {
                 <br>
                 <br>
                 <br>
-                <small>Next Remind after {$interval}s</small>
+                <small>Next Remind after {$interval} minutes</small>
 
             </body>
             </html>
     
         MSGBODY;
 
-        if (sendMail($email, $subject, $body)) {
-            echo $cli_green . $i . '. Mail Sent Successfully to - ' . $name . PHP_EOL . $cli_red;
+        $from = 'Time Left ' . en2bn(round($time_left_in_hours, 2)) . ' Hours';
+
+        if (sendMail($email, $subject, $body, $from)) {
+            $sentMail = is_array($email) ? implode(',', $email) : $email; 
+            echo $cli_green . $i . '. Mail Sent Successfully to - ' . $name . '<'. $sentMail .'>'  . PHP_EOL . $cli_red;
         } else {
             echo $cli_red . $i . '. Failed to send!' . PHP_EOL . $cli_red;
         }
