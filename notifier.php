@@ -60,7 +60,7 @@ while (time() < NOTIFY_UNTILL) {
         MSGBODY;
 
         if (sendMail($email, $subject, $body)) {
-            echo $cli_green . $i . '. Mail Sent Successfully' . PHP_EOL . $cli_red;
+            echo $cli_green . $i . '. Mail Sent Successfully to - ' . $name . PHP_EOL . $cli_red;
         } else {
             echo $cli_red . $i . '. Failed to send!' . PHP_EOL . $cli_red;
         }
