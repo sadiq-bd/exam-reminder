@@ -17,6 +17,8 @@ while (time() < NOTIFY_UNTILL) {
     $time_left_in_hours = $time_left_in_mins / 60;   
     $time_left_in_days = $time_left_in_hours / 24;   
 
+    $interval = NOTIFY_INTERVAL;
+
     foreach (getRecipients(RECIPIENTS_FILE) as $j => $recipient) {
         $i++;
         $name = $recipient['name'];
@@ -50,7 +52,7 @@ while (time() < NOTIFY_UNTILL) {
                 <br>
                 <br>
                 <br>
-                <small>Next Remind after 1 hour</small>
+                <small>Next Remind after {$interval}s</small>
 
             </body>
             </html>
