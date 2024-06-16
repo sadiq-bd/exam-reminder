@@ -24,9 +24,11 @@ while (time() < NOTIFY_UNTILL) {
         $name = $recipient['name'];
         $email = $recipient['email'];
 
-        $hours = round($time_left_in_hours, 2) . ' ঘণ্টা ';
-        $mins = round($time_left_in_mins - (intval($time_left_in_hours) / 60)) . ' মিনিট ';
-        if ($mins <= 0) $mins = '';
+        $hours = intval($time_left_in_hours, 2) . ' ঘণ্টা ';
+        $mins = '';
+        if (!empty(explode('.', $time_left_in_hours)[1])) {
+            $mins = round((explode('.', round($time_left_in_hours, 2))[1]) * 0.6) . ' মিনিট ';
+        }
 
         $subject = en2bn('পড় ভাই পড় 💥!!! আর মাত্র ' . $hours . $mins . 'বাকি!!!');
 
