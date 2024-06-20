@@ -11,11 +11,11 @@ $cli_default = "\033[1;39m";
 $i = 0;
 
 while (time() < NOTIFY_UNTILL) {
-    
-    $time_left_in_secs = NOTIFY_UNTILL - time();   
-    $time_left_in_mins = $time_left_in_secs / 60;   
-    $time_left_in_hours = $time_left_in_mins / 60;   
-    $time_left_in_days = $time_left_in_hours / 24;   
+
+    $time_left_in_secs = NOTIFY_UNTILL - time();
+    $time_left_in_mins = $time_left_in_secs / 60;
+    $time_left_in_hours = $time_left_in_mins / 60;
+    $time_left_in_days = $time_left_in_hours / 24;
 
     $interval = NOTIFY_INTERVAL / 60;   // in minutes
 
@@ -24,11 +24,8 @@ while (time() < NOTIFY_UNTILL) {
         $name = $recipient['name'];
         $email = $recipient['email'];
 
-        $hours = intval($time_left_in_hours, 2) . ' ঘণ্টা ';
-        $mins = '';
-        if (!empty(explode('.', $time_left_in_hours)[1])) {
-            $mins = round((explode('.', round($time_left_in_hours, 2))[1]) * 0.6) . ' মিনিট ';
-        }
+        $hours = intval($time_left_in_hours) . ' ঘণ্টা ';
+        $mins = ($time_left_in_mins % 60) . ' মিনিট ';
 
         $subject = en2bn('পড় ভাই পড় 💥!!! আর মাত্র ' . $hours . $mins . 'বাকি!!!');
 
