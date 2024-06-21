@@ -27,7 +27,7 @@ while (time() < NOTIFY_UNTILL) {
         $hours = intval($time_left_in_hours) . ' ঘণ্টা ';
         $mins = ($time_left_in_mins % 60) . ' মিনিট ';
 
-        $subject = en2bn('পড় ভাই পড় 💥!!! আর মাত্র ' . $hours . $mins . 'বাকি!!!');
+        $subject = en2bn('আর মাত্র ' . $hours . $mins . 'বাকি!!! পড় ভাই পড় 💥!!!');
 
         $body = <<<MSGBODY
     
