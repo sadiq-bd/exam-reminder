@@ -11,6 +11,7 @@
         "name": "Someone2",
         "email": [
             "doe@gmail.com"
-        ]
+        ],
+        "tg_chat_id" : 11223892
     }
 ]

@@ -15,3 +15,5 @@ define('MAIL_USERNAME', 'username@gmail.com');
 define('MAIL_PASSWORD', 'password_here');
 
 define('MAIL_FROM', MAIL_USERNAME);
+
+define('TELEGRAM_BOT_API', '<API_KEY_HERE>');

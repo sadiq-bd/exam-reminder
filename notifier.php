@@ -22,53 +22,75 @@ while (time() < NOTIFY_UNTILL) {
     foreach (getRecipients(RECIPIENTS_FILE) as $j => $recipient) {
         $i++;
         $name = $recipient['name'];
-        $email = $recipient['email'];
+        $email = @$recipient['email'];
+        $tg_chat_id = @$recipient['tg_chat_id'];
 
         $hours = intval($time_left_in_hours) . ' ঘণ্টা ';
         $mins = ($time_left_in_mins % 60) . ' মিনিট ';
 
         $subject = en2bn('আর মাত্র ' . $hours . $mins . 'বাকি!!! পড় ভাই পড় 💥!!!');
 
-        $body = <<<MSGBODY
-    
-            <!DOCTYPE html>
-            <html lang="en">
-            <head>
-                <meta charset="UTF-8">
-                <meta name="viewport" content="width=device-width, initial-scale=1.0">
-                <title>{$subject}</title>
-            </head>
-            <body>
-                <h5>প্রিয় {$name}, </h5><br>
+        if ($tg_chat_id) {
+            $http = new \GuzzleHttp\Client();
+            $response = $http->post(
+                'https://api.telegram.org/bot'.TELEGRAM_BOT_API.'/sendMessage',
+                [
+                    'json' => [
+                        'chat_id' => $tg_chat_id,
+                        'text' => $subject
+                    ]
+                ]
+            );
+            $resp = @json_decode($response->getBody(), true);
+            if (!empty($resp['ok']) && $resp['ok'] == true) {
+                echo $cli_green . $i . '. Telegram Message Sent Successfully to - ' . $name . PHP_EOL . $cli_red;
+            } else {
+                echo $cli_red . $i . '. Failed to send telegram message!' . PHP_EOL . $cli_red;
+            }
+        }
 
-                <p>
-                    {$subject}
-                </p>
-                <h2 style="color:red;">অনুগ্রহ করে পড়তে বসুন</h2>
+        if ($email) {
+            $body = <<<MSGBODY
+        
+                <!DOCTYPE html>
+                <html lang="en">
+                <head>
+                    <meta charset="UTF-8">
+                    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+                    <title>{$subject}</title>
+                </head>
+                <body>
+                    <h5>প্রিয় {$name}, </h5><br>
 
-                <br>
-                <hr>
-                <br>
+                    <p>
+                        {$subject}
+                    </p>
+                    <h2 style="color:red;">অনুগ্রহ করে পড়তে বসুন</h2>
 
-                <center>আপনার শুভাকাঙ্ক্ষী - <a href="https://sadiq.us.to">সাদিক</a></center>
+                    <br>
+                    <hr>
+                    <br>
 
-                <br>
-                <br>
-                <br>
-                <small>Next Remind after {$interval} minutes</small>
+                    <center>আপনার শুভাকাঙ্ক্ষী - <a href="https://sadiq.us.to">সাদিক</a></center>
 
-            </body>
-            </html>
-    
-        MSGBODY;
+                    <br>
+                    <br>
+                    <br>
+                    <small>Next Remind after {$interval} minutes</small>
 
-        $from = 'Time_Left_' . intval($time_left_in_hours) . '_Hours';
+                </body>
+                </html>
+        
+            MSGBODY;
 
-        if (sendMail($email, $subject, $body, $from)) {
-            $sentMail = is_array($email) ? implode(',', $email) : $email; 
-            echo $cli_green . $i . '. Mail Sent Successfully to - ' . $name . '<'. $sentMail .'>'  . PHP_EOL . $cli_red;
-        } else {
-            echo $cli_red . $i . '. Failed to send!' . PHP_EOL . $cli_red;
+            $from = 'Time_Left_' . intval($time_left_in_hours) . '_Hours';
+
+            if (sendMail($email, $subject, $body, $from)) {
+                $sentMail = is_array($email) ? implode(',', $email) : $email; 
+                echo $cli_green . $i . '. Mail Sent Successfully to - ' . $name . '<'. $sentMail .'>'  . PHP_EOL . $cli_red;
+            } else {
+                echo $cli_red . $i . '. Failed to send!' . PHP_EOL . $cli_red;
+            }
         }
     
     }
