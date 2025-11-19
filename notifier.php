@@ -23,6 +23,7 @@ echo $cli_default . "\n\n" . '-- Exam Reminder --' . "\n\n";
 
 while (time() < NOTIFY_UNTILL) {
   if (date('i') % (NOTIFY_INTERVAL / 60) == 0) {
+    $i++;
     $time_left_in_secs = NOTIFY_UNTILL - time();
     $time_left_in_mins = $time_left_in_secs / 60;
     $time_left_in_hours = $time_left_in_mins / 60;
@@ -33,12 +34,12 @@ while (time() < NOTIFY_UNTILL) {
     $pool = Pool::create();
 
     foreach (getRecipients(RECIPIENTS_FILE) as $j => $recipient) {
-      $i++;
+
       $name = $recipient['name'];
       $email = isset($recipient['email']) ? $recipient['email'] : null;
       $tg_chat_id = isset($recipient['tg_chat_id']) ? $recipient['tg_chat_id'] : null;
 
-      $hours = intval($time_left_in_hours) . ' ঘণ্টা ';
+      $hours = round($time_left_in_hours) . ' ঘণ্টা ';
       $mins = ($time_left_in_mins % 60) . ' মিনিট ';
 
       $subject = en2bn('আর মাত্র ' . $hours . $mins . 'বাকি!!! পড় ভাই পড় 💥!!!');
