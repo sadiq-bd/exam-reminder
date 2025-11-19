@@ -39,7 +39,7 @@ while (time() < NOTIFY_UNTILL) {
       $email = isset($recipient['email']) ? $recipient['email'] : null;
       $tg_chat_id = isset($recipient['tg_chat_id']) ? $recipient['tg_chat_id'] : null;
 
-      $hours = round($time_left_in_hours) . ' ঘণ্টা ';
+      $hours = floor($time_left_in_hours) . ' ঘণ্টা ';
       $mins = ($time_left_in_mins % 60) . ' মিনিট ';
 
       $subject = en2bn('আর মাত্র ' . $hours . $mins . 'বাকি!!! পড় ভাই পড় 💥!!!');
