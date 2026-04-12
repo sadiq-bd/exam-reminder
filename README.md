@@ -1,5 +1,5 @@
 <p align="left">
-  <img src="https://api.sadiq.workers.dev/app/github/repo/exam-reminder/views" alt="Repo views" />
+  <img src="https://api.sadiq.workers.dev/app/github/repo/exam-reminder/views?nocache" alt="Repo views" />
 </p>
 
 # Exam Reminder
